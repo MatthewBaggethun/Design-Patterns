@@ -1,12 +1,12 @@
-package behavioral.strategy.AIMovement.strategyPatternAIMovement;
+package behavioral.strategy.AIMovement.clientAIMovement;
 
+import behavioral.strategy.AIMovement.contextNPC.Conjurer;
+import behavioral.strategy.AIMovement.contextNPC.Dragon;
+import behavioral.strategy.AIMovement.contextNPC.NPC;
+import behavioral.strategy.AIMovement.contextNPC.Soldier;
 import behavioral.strategy.AIMovement.movementStrategy.MovementStrategy;
 import behavioral.strategy.AIMovement.movementStrategy.TeleportMovement;
 import behavioral.strategy.AIMovement.movementStrategy.WalkMovement;
-import behavioral.strategy.AIMovement.nonPlayerControlledCharacter.Conjurer;
-import behavioral.strategy.AIMovement.nonPlayerControlledCharacter.Dragon;
-import behavioral.strategy.AIMovement.nonPlayerControlledCharacter.NPC;
-import behavioral.strategy.AIMovement.nonPlayerControlledCharacter.Soldier;
 
 public class Main {
 

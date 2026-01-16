@@ -1,4 +1,4 @@
-package behavioral.strategy.AIMovement.nonPlayerControlledCharacter;
+package behavioral.strategy.AIMovement.contextNPC;
 
 import behavioral.strategy.AIMovement.movementStrategy.TeleportMovement;
 

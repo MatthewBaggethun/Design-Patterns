@@ -1,15 +1,19 @@
-package behavioral.strategy.textFormatting.textEditor;
+package behavioral.strategy.textFormatting.contextTextEditor;
 
 import behavioral.strategy.textFormatting.formatStrategy.Format;
 
-public class TextEditor {
+/**
+ * Context class containing a Format strategy. Used to format Strings as defined
+ * by the Format provided in the constructor.
+ */
+public class ContextTextEditor {
 	private Format formatter;
 	
 	/**
 	 * Defines the formatting strategy. Call formatWithStrategy to return the formatted String.
 	 * @param format The formatting strategy which will be used.
 	 */
-	public TextEditor(Format format) {
+	public ContextTextEditor(Format format) {
 		this.formatter = format;
 	}
 	

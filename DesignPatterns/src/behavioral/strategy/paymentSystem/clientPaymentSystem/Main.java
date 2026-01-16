@@ -1,6 +1,6 @@
-package behavioral.strategy.paymentSystem.strategyPatternPaymentSystem;
+package behavioral.strategy.paymentSystem.clientPaymentSystem;
 
-import behavioral.strategy.paymentSystem.checkout.Checkout;
+import behavioral.strategy.paymentSystem.contextCheckout.Checkout;
 import behavioral.strategy.paymentSystem.paymentStrategy.PaymentCreditCard;
 import behavioral.strategy.paymentSystem.paymentStrategy.PaymentCrypto;
 import behavioral.strategy.paymentSystem.paymentStrategy.PaymentPayPal;
