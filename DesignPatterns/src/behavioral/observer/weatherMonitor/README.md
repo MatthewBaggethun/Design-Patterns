@@ -4,7 +4,7 @@
 This project is a Java-based implementation of the Observer design pattern,
 inspired by the example from *Head First Design Patterns*.
 
-The system models a weather station (`WeatherDataSubject`) that automatically notifies
+The system models a weather station `WeatherDataSubject` that automatically notifies
 multiple display elements when weather measurements change.
 
 ## Design Pattern Used
@@ -16,7 +16,7 @@ multiple display elements when weather measurements change.
 - Loose coupling between subject and observers
 
 ## UML Diagram
-![Observer UML Diagram](uml/observer.png)
+![Observer UML Diagram](uml/WeatherStationUML.png)
 
 ## Project Structure
 - `Subject` – interface defining observer management
@@ -30,7 +30,3 @@ multiple display elements when weather measurements change.
 1. Clone the repository
 2. Compile the project
 3. Run `WeatherStation.java`
-
-```bash
-javac *.java
-java WeatherStation
