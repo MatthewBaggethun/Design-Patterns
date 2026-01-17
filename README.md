@@ -4,12 +4,11 @@
 This project contains Java-based implementations of various design patterns,
 inspired by *Head First Design Patterns*.
 
-## Design Patterns Used
+## Project Structure
 This monolithic repository is separated by three archetypes of design patterns, namely
 **behavioral, creational and structural**. Enter any of these file-paths to discover sub-sequent
 design patterns belonging to any of the three archetypes.
 
-## Project Structure
 * Behavioral
     - Strategy Pattern
     - Observer Pattern
