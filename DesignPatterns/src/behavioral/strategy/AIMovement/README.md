@@ -16,6 +16,7 @@ strategy pattern, so movement is defined by strings printed to the console.
 
 ## Project Structure
 **contextNPC**
+
 Contains the abstract class `NPC` which stores a `MovementStrategy` field parameter and defines methods to set and perform movement. The strategy can be changed dynamically.
 All other classes extend NPC with hard-coded strategies, although these are transitively dynamic (since `NPC` defines the dynamic behavior.)
 
@@ -26,7 +27,8 @@ All other classes extend NPC with hard-coded strategies, although these are tran
   - `WalkMovement`
 
 **clientAIMovement**
-	- Contains the `Main` class, which demonstrates the usage of the Strategy pattern by assigning different movement strategies, altering and performing those movements.
+
+Contains the `Main` class, which demonstrates the usage of the Strategy pattern by assigning different movement strategies, altering and performing those movements.
 
 ## How to Run
 1. Clone the repository
