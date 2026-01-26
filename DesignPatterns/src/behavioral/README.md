@@ -8,7 +8,7 @@ Testing has been intentionally avoided due to real life time constrains. The foc
 
 ## Design Pattern Overview & Navigation
 - [Strategy Pattern](/DesignPatterns/src/behavioral/strategy/README.md)
-- [Observer Pattern]()
+- [Observer Pattern](/DesignPatterns/src/behavioral/observer/README.md)
 
 ## Inspiration
 All the design patterns found here are inspired from the book Head First Design Patterns.
