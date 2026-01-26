@@ -1,9 +1,6 @@
 # Weather Monitoring System (Observer Pattern)
 
 ## Overview
-This project is a Java-based implementation of the Observer design pattern,
-inspired by the example from *Head First Design Patterns*.
-
 The system models a weather station `WeatherDataSubject` that automatically notifies
 multiple display elements when weather measurements change.
 

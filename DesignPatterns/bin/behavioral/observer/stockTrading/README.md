@@ -1,9 +1,6 @@
 # Stock Trading System (Observer Pattern)
 
 ## Overview
-This project is a Java-based implementation of the Observer design pattern,
-inspired by the example from *Head First Design Patterns*.
-
 In this project the observer pattern is combined with the strategy pattern to create a simplified stock trading platform.
 Various information is tracked/stored/evaluated via observers and trading strategies can be adjusted at run-time to alter performance.
 All state information comes from the `StockUpdate` class, which holds the state of the most recent stock changes. This information is then fed to the only concrete subject `StockMarketSubject`.
