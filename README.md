@@ -9,7 +9,7 @@ This monolithic repository is separated by three archetypes of design patterns, 
 **behavioral, creational and structural**. Enter any of these file-paths to discover sub-sequent
 design patterns belonging to any of the three archetypes.
 
-* Behavioral
+* [Behavioral](DesignPatterns/src/behavioral)
     - Strategy Pattern
     - Observer Pattern
 * Creational
