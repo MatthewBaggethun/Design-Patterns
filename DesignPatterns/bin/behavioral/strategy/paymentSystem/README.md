@@ -5,6 +5,7 @@ The `paymentSystem` project demonstrates the Strategy design pattern by implemen
 
 ## Project Structure
 **contextCheckout**
+
 Contains a single class `Checkout` which stores a `PaymentStrategy` field parameter. The strategy can be changed dynamically, in this case a new object is created for a new checkout procedure.
 Payments can be set and performed here.
 
@@ -15,7 +16,8 @@ Payments can be set and performed here.
   - `PaymentPayPal`
 
 **clientPaymentSystem**
-	- Contains the `Main` class, which demonstrates the usage of the Strategy pattern by assigning different payment strategies and performing those payments.
+
+Contains the `Main` class, which demonstrates the usage of the Strategy pattern by assigning different payment strategies and performing those payments.
 
 ## UML Diagram
 ![Strategy UML Diagram](uml/paymentSystem.png)
