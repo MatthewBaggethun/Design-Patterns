@@ -6,6 +6,7 @@ The formatting strategy can be dynamically changed at run-time depending on clie
 
 ## Project Structure
 **contextTextEditor**
+
 Contains a single class `ContextTextEditor` which stores a `Format` field parameter. The formatting strategy can be changed dynamically via the setter. Formatting is executed by this class.
 
 **formatStrategy**
@@ -14,7 +15,8 @@ Contains a single class `ContextTextEditor` which stores a `Format` field parame
   - `FormatUpperCase`
 
 **clientTextFormatting**
-	- Contains the `Main` class, which demonstrates the usage of the Strategy pattern by assigning different format strategies and performing those formats.
+
+Contains the `Main` class, which demonstrates the usage of the Strategy pattern by assigning different format strategies and performing those formats.
 
 ## UML Diagram
 ![Strategy UML Diagram](uml/textFormatting.png)
