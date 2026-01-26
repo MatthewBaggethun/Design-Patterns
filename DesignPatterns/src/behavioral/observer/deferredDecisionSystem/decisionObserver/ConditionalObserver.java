@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 import behavioral.observer.deferredDecisionSystem.decision.Decision;
 import behavioral.observer.deferredDecisionSystem.decisionSubject.DecisionProvider;
 
+/**
+ * An observer that updates its state based on a conditional acceptance rule.
+ */
 public class ConditionalObserver extends AbstractDecisionObserver {
 
 	private Predicate<Decision> acceptanceRule;

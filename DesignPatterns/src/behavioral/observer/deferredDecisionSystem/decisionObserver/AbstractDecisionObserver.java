@@ -20,5 +20,8 @@ public abstract class AbstractDecisionObserver implements DecisionObserver {
 	protected AbstractDecisionObserver(DecisionProvider decisionProvider) {
 		this.decisionProvider = decisionProvider;
 	}
-
+	
+	public int getLastKnownVersion() { // This is only here to showcase in the client.
+		return lastKnownVersion;
+	}
 }

@@ -21,5 +21,6 @@ associated. The open-closed principle should be kept in mind when designing Obse
 
 ## Overview & Navigation
 All sub-packages of this directory contain projects utilizing the Observer Pattern.
+- [DeferredDecisionSystem](/DesignPatterns/src/behavioral/observer/deferredDecisionSystem/README.md)
 - [StockTrading](/DesignPatterns/src/behavioral/observer/stockTrading/README.md)
 - [WeatherMonitor](/DesignPatterns/src/behavioral/observer/weatherMonitor/README.md)

@@ -2,6 +2,9 @@ package behavioral.observer.deferredDecisionSystem.decisionObserver;
 
 import behavioral.observer.deferredDecisionSystem.decisionSubject.DecisionProvider;
 
+/**
+ * An observer that defers processing updates until explicitly requested.
+ */
 public class DeferredObserver extends AbstractDecisionObserver {
 
 	/**

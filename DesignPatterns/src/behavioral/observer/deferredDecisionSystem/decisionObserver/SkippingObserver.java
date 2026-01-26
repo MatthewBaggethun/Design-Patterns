@@ -3,6 +3,9 @@ package behavioral.observer.deferredDecisionSystem.decisionObserver;
 import behavioral.observer.deferredDecisionSystem.decision.Decision;
 import behavioral.observer.deferredDecisionSystem.decisionSubject.DecisionProvider;
 
+/**
+ * An observer that skips a specified number of updates before processing one.
+ */
 public class SkippingObserver extends AbstractDecisionObserver {
 
 	private int skipInterval;
@@ -21,11 +24,11 @@ public class SkippingObserver extends AbstractDecisionObserver {
 
 	@Override
 	public void update() {
-	    int currentVersion = decisionProvider.getCurrentVersion();
-	    if (currentVersion % skipInterval == 0) {
-	        Decision d = decisionProvider.getLatestDecision();
-	        lastKnownVersion = d.getVersion();
-	    }
+		int currentVersion = decisionProvider.getCurrentVersion();
+		if (currentVersion % skipInterval == 0) {
+			Decision d = decisionProvider.getLatestDecision();
+			lastKnownVersion = d.getVersion();
+		}
 	}
 
 	public void setSkipInterval(int skipInterval) {
