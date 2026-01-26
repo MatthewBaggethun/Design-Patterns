@@ -1,4 +1,4 @@
-# Payment System Project
+# Payment System Project (Strategy Pattern)
 
 ## Overview
 The `paymentSystem` project demonstrates the Strategy design pattern by implementing different payment strategies to be used at a checkout. The payment strategy can be dynamically changed at run-time depending on user preference.

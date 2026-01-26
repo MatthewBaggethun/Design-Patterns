@@ -1,4 +1,4 @@
-# Text Formatting Project
+# Text Formatting Project (Strategy Pattern)
 
 ## Overview
 The `textFormatting` project demonstrates the Strategy design pattern by implementing different formatting strategies to be used on strings.
