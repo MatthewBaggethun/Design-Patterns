@@ -12,13 +12,21 @@ strategy pattern, so movement is defined by strings printed to the console.
 - Context classes contain reference to movement strategies allowing them to be altered at run-time
 
 ## UML Diagram
-![Observer UML Diagram](uml/StockTradingUML.png)
+![StrategyUML](uml/AIMovement.png)
 
 ## Project Structure
-- `StockSubject` – Interface defining observer management and other relevant methods/fields (see overview)
-- `StockObserver` – Interface for receiving updates
-- `StockMarketSubject` – Concrete subject storing price updates and observer management
-- `StockUpdate` – Hypothetical API used to store state of the latest stock changes
+**contextNPC**
+Contains the abstract class `NPC` which stores a `MovementStrategy` field parameter and defines methods to set and perform movement. The strategy can be changed dynamically.
+All other classes extend NPC with hard-coded strategies, although these are transitively dynamic (since `NPC` defines the dynamic behavior.)
+
+**movementStrategy**
+- Contains the `MovementStrategy` interface and its implementations:
+  - `FlyMovement`
+  - `TeleportMovement`
+  - `WalkMovement`
+
+**clientAIMovement**
+	- Contains the `Main` class, which demonstrates the usage of the Strategy pattern by assigning different movement strategies, altering and performing those movements.
 
 ## How to Run
 1. Clone the repository
