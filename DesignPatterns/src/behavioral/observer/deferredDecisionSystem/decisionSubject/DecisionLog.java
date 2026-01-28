@@ -80,7 +80,7 @@ public class DecisionLog implements DecisionSubject, DecisionProvider {
 	 * 
 	 * @return The decision history as a formatted string.
 	 */
-	public String printDecisionHistory() {
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (Decision decision : decisionHistory) {
 			sb.append("Version ").append(decision.getVersion()).append(": ").append(decision.getDecision())

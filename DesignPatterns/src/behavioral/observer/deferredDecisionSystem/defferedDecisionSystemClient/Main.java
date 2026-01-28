@@ -38,7 +38,7 @@ public class Main {
 			System.out.println("DeferredObserver last known version: " + decisionObserver.getLastKnownVersion());
 			System.out.println("ImmediateObserver last known version: " + immediateObserver.getLastKnownVersion());
 			System.out.println("SkippingObserver last known version: " + skippingObserver.getLastKnownVersion());
-			System.out.println(decisionLog.printDecisionHistory());
+			System.out.println("\n" + "The decision log contains:" + "\n" + decisionLog.toString());
 			System.out.println();
 		}
 		
