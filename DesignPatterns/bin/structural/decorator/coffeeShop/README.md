@@ -1,29 +1,39 @@
-# Coffee Shop (Decorator Pattern)
+# Coffee Shop (Decorator Pattern + Factory Pattern)
 
 ## Problem Space
-Imagine a coffee shop that has different toppings (soy, whip, mocha...), different sizes and different coffee types. Maintaining code for every possible variation of coffee will result in a class explosion. This is the working example provided in Head First Design Patterns, which I will be implementing here with some additional logic for business, like tax and discounts. I will explore how the Decorator Pattern is a potential solution to improving the maintainability of such a code-base.
+The coffee shop problem extends from that which is found in chapter three of Head First Design Patterns. A coffee shop is struggling to design a system capable of handling new combinations of coffee and condiments in a sustainable and maintainable way. The team working on the project has designed their system to utilize subclassing to accommodate for every possible combination. They are struggling to keep up with additional menu items, since each item results in its own class explosion. Creating custom orders is also difficult since their design does not easily allow for customer specific inputs without creating a subclass for it. Something as simple as 2x whip for every combination is verging on unmaintainable.
 
-The problem will contain the following themes that will be all solved utilizing Decorator:
- - Beverage
- - Condiment (topping)
- - Pricing
- - Receipt
- 
-The focus is on the Beverage which will be the core abstraction that everything else will utilize. 
+This implementation aims to solve these issues and add more functionality to the system. Utilizing the Decorator and Factory patterns I will redesign the system to make adding new menu items and/or combinations of items much simpler. Additionally, an order tracking and receipt functionality has been added so that sales can be tracked externally (in a DB) at a later time. These systems will follow rules and apply logic accordingly (Ex. tax calculation, discounts...).
+
+Making this system maintainable and functional is the goal. Every system will be separated according to concerns whilst maintaining the open/closed principle. Adding new functionality will not require old code to be rewritten. The system will operate dynamically. This is accomplished by favoring composition over inheritance. The creation of objects will be performed via factories that will also operate dynamically with type safety. This will minimize code duplication and reduce the room for error.
+
+The project will have many themes:
+ - Utilize Decorator to dynamically modify object responsibility.
+ - Utilize Factory to dynamically create wrapped objects.
+ - Design the system to allow for easy future additions.
+ - Create a maintainable system with low code duplication.
+ - Make package coupling obvious and seamless.
 
 ## Overview
-Implementation of the Decorator Pattern, which is used to attach responsibilities to a context object dynamically.
+Implementation of the Decorator Pattern, combined with Factory Pattern. These patterns function well together, allowing OO principles to be followed in a somewhat formulaic manor. Each design theme is located in its own package, with factories separated out as well.
 
 ## Design Patterns Used
 **Decorator Pattern**
 
+**Factory Pattern**
+
 ## UML Diagram
-![Decorator UML Diagram]()
+![Decorator UML Diagram](resources/CoffeeShop.png)
 
 ## Project Structure
+Decorator implementations are found in `beverage`, `condiment`, `order` and `receipt`.
+Factory implementation are found in `beverageFactory`, `orderFactory` and `receiptFactory`.
 
+Decorator packages are structured similarly. There are interfaces defining essential functionality and abstract classes extending on this functionality further. `condiment` only contains an abstract class since it is only defining specific functionality to place around `Beverage` classes.
+
+Factory packages each contain an interface, abstract class, record and at least one enum. These classes are used together to seamlessly allow for dynamic object creation. The concrete factories each contain "default" in their file name. 
 
 ## How to Run
 1. Clone the repository
 2. Compile the project
-3. Run ``
+3. Run `coffeeShopClient/Main.java`

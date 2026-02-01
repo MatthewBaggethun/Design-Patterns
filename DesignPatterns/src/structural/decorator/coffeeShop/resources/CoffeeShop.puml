@@ -1,0 +1,256 @@
+@startuml
+class HeaderDecorator [[java:structural.decorator.coffeeShop.receipt.HeaderDecorator]] {
+	+HeaderDecorator(receipt: Receipt)
+	+print(): String
+}
+class ReceiptDecorator {
+}
+ReceiptDecorator <|-- HeaderDecorator
+class Espresso [[java:structural.decorator.coffeeShop.beverage.Espresso]] {
+	+Espresso(size: Size)
+	+cost(): double
+}
+class Beverage {
+}
+Beverage <|-- Espresso
+class DefaultBeverageFactory [[java:structural.decorator.coffeeShop.beverageFactory.DefaultBeverageFactory]] {
+	+createBeverage(request: BeverageRequest): Beverage
+}
+interface BeverageFactory {
+}
+BeverageFactory <|.. DefaultBeverageFactory
+interface OrderFactory [[java:structural.decorator.coffeeShop.orderFactory.OrderFactory]] {
+	createOrder(request: OrderRequest): Order
+}
+abstract class OrderDecorator [[java:structural.decorator.coffeeShop.order.OrderDecorator]] {
+	#OrderDecorator(order: Order)
+	+addBeverage(beverage: Beverage): void
+	+getTotalCost(): double
+	+getOrderDescription(): String
+}
+class Order {
+}
+OrderDecorator --> "1" Order : order
+class Beverage {
+}
+OrderDecorator --> "*" Beverage : getBeverages()
+interface Order {
+}
+Order <|.. OrderDecorator
+class BeverageRequest <<Record>> [[java:structural.decorator.coffeeShop.beverageFactory.BeverageRequest]] {
+-BeverageType beverageType
+-Size size
+-List<CondimentType> condiments
+}
+interface Receipt [[java:structural.decorator.coffeeShop.receipt.Receipt]] {
+	print(): String
+}
+class DefaultOrderFactory [[java:structural.decorator.coffeeShop.orderFactory.DefaultOrderFactory]] {
+	+createOrder(request: OrderRequest): Order
+}
+interface OrderFactory {
+}
+OrderFactory <|.. DefaultOrderFactory
+class ReceiptRequest <<Record>> [[java:structural.decorator.coffeeShop.receiptFactory.ReceiptRequest]] {
+-Order order
+-List<ReceiptType> receiptDecorators
+}
+enum OrderType [[java:structural.decorator.coffeeShop.orderFactory.OrderType]] {
+	HAPPY_HOUR
+	TAX
+	+{abstract} createDecorator(order: Order): Order
+}
+abstract class Beverage [[java:structural.decorator.coffeeShop.beverage.Beverage]] {
+	#description: String
+	#Beverage()
+	#Beverage(size: Size)
+	+{abstract} cost(): double
+	+getDescription(): String
+	+setSize(size: Size): void
+}
+class Size {
+}
+Beverage --> "1" Size : size
+class Size {
+}
+Beverage --> "1" Size : getSize()
+abstract class CondimentDecorator [[java:structural.decorator.coffeeShop.condiment.CondimentDecorator]] {
+	#CondimentDecorator(beverage: Beverage)
+	+{abstract} getDescription(): String
+}
+class Beverage {
+}
+CondimentDecorator --> "1" Beverage : beverage
+class Size {
+}
+CondimentDecorator --> "1" Size : getSize()
+class Beverage {
+}
+CondimentDecorator --> "1" Beverage : getWrappedBeverage()
+class Beverage {
+}
+Beverage <|-- CondimentDecorator
+class FooterDecorator [[java:structural.decorator.coffeeShop.receipt.FooterDecorator]] {
+	+FooterDecorator(receipt: Receipt)
+	+print(): String
+}
+class ReceiptDecorator {
+}
+ReceiptDecorator <|-- FooterDecorator
+enum Size [[java:structural.decorator.coffeeShop.beverage.Size]] {
+	SMALL
+	MEDIUM
+	LARGE
+	+{abstract} toString(): String
+}
+enum CondimentType [[java:structural.decorator.coffeeShop.beverageFactory.CondimentType]] {
+	MILK
+	MOCHA
+	WHIP
+	+{abstract} applyCondiment(beverage: Beverage): Beverage
+}
+class BasicOrder [[java:structural.decorator.coffeeShop.order.BasicOrder]] {
+	+addBeverage(beverage: Beverage): void
+	+getTotalCost(): double
+	+getOrderDescription(): String
+}
+class Beverage {
+}
+BasicOrder --> "*" Beverage : beverages
+class Beverage {
+}
+BasicOrder --> "*" Beverage : getBeverages()
+interface Order {
+}
+Order <|.. BasicOrder
+class DateTimeDecorator [[java:structural.decorator.coffeeShop.receipt.DateTimeDecorator]] {
+	+DateTimeDecorator(receipt: Receipt)
+	+print(): String
+}
+class ReceiptDecorator {
+}
+ReceiptDecorator <|-- DateTimeDecorator
+class DefaultReceiptFactory [[java:structural.decorator.coffeeShop.receiptFactory.DefaultReceiptFactory]] {
+	+createReceipt(request: ReceiptRequest): Receipt
+}
+interface ReceiptFactory {
+}
+ReceiptFactory <|.. DefaultReceiptFactory
+class Milk [[java:structural.decorator.coffeeShop.condiment.Milk]] {
+	+Milk(beverage: Beverage)
+	+cost(): double
+	+getDescription(): String
+}
+class CondimentDecorator {
+}
+CondimentDecorator <|-- Milk
+class DefaultReceipt [[java:structural.decorator.coffeeShop.receipt.DefaultReceipt]] {
+	+DefaultReceipt(order: Order)
+	+print(): String
+}
+class Order {
+}
+DefaultReceipt --> "1" Order : order
+interface Receipt {
+}
+Receipt <|.. DefaultReceipt
+class DarkRoast [[java:structural.decorator.coffeeShop.beverage.DarkRoast]] {
+	+DarkRoast(size: Size)
+	+cost(): double
+}
+class Beverage {
+}
+Beverage <|-- DarkRoast
+class TaxDecorator [[java:structural.decorator.coffeeShop.order.TaxDecorator]] {
+	-taxRate: double
+	+TaxDecorator(order: Order, taxRate: double)
+	+getTotalCost(): double
+	+getOrderDescription(): String
+}
+class OrderDecorator {
+}
+OrderDecorator <|-- TaxDecorator
+interface ReceiptFactory [[java:structural.decorator.coffeeShop.receiptFactory.ReceiptFactory]] {
+	createReceipt(request: ReceiptRequest): Receipt
+}
+interface Order [[java:structural.decorator.coffeeShop.order.Order]] {
+	addBeverage(beverage: Beverage): void
+	getTotalCost(): double
+	getOrderDescription(): String
+}
+class Beverage {
+}
+Order --> "*" Beverage : getBeverages()
+class Whip [[java:structural.decorator.coffeeShop.condiment.Whip]] {
+	+Whip(beverage: Beverage)
+	+cost(): double
+	+getDescription(): String
+}
+class CondimentDecorator {
+}
+CondimentDecorator <|-- Whip
+class HouseBlend [[java:structural.decorator.coffeeShop.beverage.HouseBlend]] {
+	+HouseBlend(size: Size)
+	+cost(): double
+}
+class Beverage {
+}
+Beverage <|-- HouseBlend
+abstract class ReceiptDecorator [[java:structural.decorator.coffeeShop.receipt.ReceiptDecorator]] {
+	#ReceiptDecorator(decoratedReceipt: Receipt)
+	+print(): String
+}
+class Receipt {
+}
+ReceiptDecorator --> "1" Receipt : decoratedReceipt
+interface Receipt {
+}
+Receipt <|.. ReceiptDecorator
+enum ReceiptType [[java:structural.decorator.coffeeShop.receiptFactory.ReceiptType]] {
+	HEADER
+	FOOTER
+	DATETIME
+	+{abstract} create(receipt: Receipt): Receipt
+}
+interface BeverageFactory [[java:structural.decorator.coffeeShop.beverageFactory.BeverageFactory]] {
+	createBeverage(request: BeverageRequest): Beverage
+}
+enum BeverageType [[java:structural.decorator.coffeeShop.beverageFactory.BeverageType]] {
+	ESPRESSO
+	HOUSE_BLEND
+	DARK_ROAST
+	+{abstract} create(size: Size): Beverage
+}
+class HappyHourDecorator [[java:structural.decorator.coffeeShop.order.HappyHourDecorator]] {
+	-discountRate: double
+	+HappyHourDecorator(order: Order, discountRate: double)
+	+getTotalCost(): double
+	+getOrderDescription(): String
+}
+class OrderDecorator {
+}
+OrderDecorator <|-- HappyHourDecorator
+class OrderRequest <<Record>> [[java:structural.decorator.coffeeShop.orderFactory.OrderRequest]] {
+-List<Beverage> beverages
+-List<OrderType> orderDecorators
+}
+class Mocha [[java:structural.decorator.coffeeShop.condiment.Mocha]] {
+	+Mocha(beverage: Beverage)
+	+cost(): double
+	+getDescription(): String
+}
+class CondimentDecorator {
+}
+CondimentDecorator <|-- Mocha
+
+DefaultBeverageFactory --> BeverageRequest
+BeverageRequest --> BeverageType
+BeverageRequest --> "*" CondimentType
+
+DefaultOrderFactory --> OrderRequest
+OrderRequest --> "*" OrderType
+
+DefaultReceiptFactory --> ReceiptRequest
+ReceiptRequest --> "*" ReceiptType
+
+@enduml
