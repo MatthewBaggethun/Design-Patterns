@@ -12,7 +12,7 @@ design patterns belonging to any of the three archetypes.
 * [Behavioral](DesignPatterns/src/behavioral/README.md)
     - [Observer Pattern](DesignPatterns/src/behavioral/observer/README.md)
     - [Strategy Pattern](DesignPatterns/src/behavioral/strategy/README.md)
-* Creational
+* [Creational](DesignPatterns/src/creational/README.md)
 * [Structural](DesignPatterns/src/structural/README.md)
 	- [Decorator Pattern](DesignPatterns/src/structural/decorator/README.md)
 

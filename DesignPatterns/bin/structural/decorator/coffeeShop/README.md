@@ -15,12 +15,12 @@ The project will have many themes:
  - Make package coupling obvious and seamless.
 
 ## Overview
-Implementation of the Decorator Pattern, combined with Factory Pattern. These patterns function well together, allowing OO principles to be followed in a somewhat formulaic manor. Each design theme is located in its own package, with factories separated out as well.
+Implementation of the Decorator Pattern, combined with Factory Pattern. These patterns function well together, allowing OO principles to be followed in a somewhat formulaic manor. Both patterns interact dynamically. Factories are responsible for creating wrapped objects whilst Decorator is responsible for behavior specific logic. The wrapping of objects should be performed solely through factory methods. The order of wrapping is defined by the order they are provided into factory constructors. 
 
 ## Design Patterns Used
-**Decorator Pattern**
+**Decorator Pattern**: Used to dynamically add responsibilities to objects at runtime without modifying their code.
 
-**Factory Pattern**
+**Factory Pattern**: Used to encapsulate the creation logic of objects, ensuring type safety and reducing code duplication.
 
 ## UML Diagram
 ![Decorator UML Diagram](resources/CoffeeShop.png)
@@ -32,6 +32,12 @@ Factory implementation are found in `beverageFactory`, `orderFactory` and `recei
 Decorator packages are structured similarly. There are interfaces defining essential functionality and abstract classes extending on this functionality further. `condiment` only contains an abstract class since it is only defining specific functionality to place around `Beverage` classes.
 
 Factory packages each contain an interface, abstract class, record and at least one enum. These classes are used together to seamlessly allow for dynamic object creation. The concrete factories each contain "default" in their file name. 
+
+- **Beverage**: Represents the base component in the Decorator pattern.
+- **CondimentDecorator**: Abstract class for condiments that wrap `Beverage` objects.
+- **Order**: Represents an order, which can be decorated with additional logic like tax or discounts.
+- **Receipt**: Represents a receipt, which can be decorated with headers, footers, and timestamps.
+- **Factories**: Responsible for creating instances of `Beverage`, `Order`, and `Receipt` dynamically.
 
 ## How to Run
 1. Clone the repository
