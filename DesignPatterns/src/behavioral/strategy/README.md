@@ -12,7 +12,10 @@ In Head First Design Patterns, they define such a scenario with a Duck class. Th
 Instead of hard-coding many Duck classes, it is instead possible to encapsulate what varies (the quack) and inherit the rest.
 
 ## Overview & Navigation
-All sub-packages of this directory contain projects utilizing the Strategy Pattern.
+These projects utilize Strategy Pattern in combination with other patterns:
+- [HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/README.md)
+
+All sub-packages of this directory contain projects utilizing only Strategy Pattern. These projects are extremely simplistic.
 - [AIMovement](/DesignPatterns/src/behavioral/strategy/AIMovement/README.md)
 - [PaymentSystem](/DesignPatterns/src/behavioral/strategy/paymentSystem/README.md)
 - [TextFormatting](/DesignPatterns/src/behavioral/strategy/textFormatting/README.md)
