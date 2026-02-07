@@ -1,4 +1,4 @@
-# HTTP Request Pipeline in Java
+# HTTP Request Pipeline
 ### Exploring Decorator, Strategy, Factory and Builder Design Patterns
 
 ## Problem Space
