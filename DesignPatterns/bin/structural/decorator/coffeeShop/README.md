@@ -17,13 +17,6 @@ The project will have many themes:
 ## Overview
 Implementation of the Decorator Pattern, combined with Factory Pattern. These patterns function well together, allowing OO principles to be followed in a somewhat formulaic manor. Both patterns interact dynamically. Factories are responsible for creating wrapped objects whilst Decorator is responsible for behavior specific logic. The wrapping of objects should be performed solely through factory methods. The order of wrapping is defined by the order they are provided into factory constructors. 
 
-
-
-## Design Patterns Used
-**Decorator Pattern**
-
-**Factory Pattern**
-
 ## UML Diagram
 ![Decorator UML Diagram](resources/CoffeeShop.png)
 

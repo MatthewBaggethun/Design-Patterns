@@ -1,0 +1,125 @@
+@startuml
+class TimeoutDecorator [[java:structural.decorator.httpPipeline.Decorators.TimeoutDecorator]] {
+	-timeout: Duration
+	+TimeoutDecorator(decoratedHandler: HttpHandler, timeout: Duration)
+	+execute(request: Request): Response
+	+executeAsync(request: Request): CompletableFuture<Response>
+}
+class HttpHandlerDecorator {
+}
+HttpHandlerDecorator <|-- TimeoutDecorator
+class JavaHttpHandler [[java:structural.decorator.httpPipeline.HttpHandler.JavaHttpHandler]] {
+	-client: HttpClient
+	+JavaHttpHandler(client: HttpClient)
+	+{static} defaultClient(): JavaHttpHandler
+	+execute(request: Request): Response
+	+executeAsync(request: Request): CompletableFuture<Response>
+	-toHttpRequest(request: Request): HttpRequest
+	-toResponse(httpResponse: HttpResponse<String>): Response
+}
+interface HttpHandler {
+}
+HttpHandler <|.. JavaHttpHandler
+interface AuthenticationStrategy [[java:structural.decorator.httpPipeline.Strategy.Auth.AuthenticationStrategy]] {
+	headerName(): String
+	headerValue(request: Request): String
+}
+interface HttpHandler [[java:structural.decorator.httpPipeline.HttpHandler.HttpHandler]] {
+	execute(request: Request): Response
+	executeAsync(request: Request): CompletableFuture<Response>
+}
+class PipelineConfig [[java:structural.decorator.httpPipeline.Factory.PipelineConfig]] {
+	-enableLogging: boolean
+	-enableRetry: boolean
+	-retryAttempts: int
+	-enableTimeout: boolean
+	-timeout: Duration
+	-PipelineConfig(builder: Builder)
+	+isEnableLogging(): boolean
+	+isEnableRetry(): boolean
+	+isEnableTimeout(): boolean
+	+getRetryAttempts(): int
+	+getTimeout(): Duration
+}
+class BackoffStrategy {
+}
+PipelineConfig --> "1" BackoffStrategy : backoffStrategy
+class AuthenticationStrategy {
+}
+PipelineConfig --> "0..1" AuthenticationStrategy : authStrategy
+class BackoffStrategy {
+}
+PipelineConfig --> "1" BackoffStrategy : getBackoffStrategy()
+class AuthenticationStrategy {
+}
+PipelineConfig --> "0..1" AuthenticationStrategy : getAuthStrategy()
+class LoggingDecorator [[java:structural.decorator.httpPipeline.Decorators.LoggingDecorator]] {
+	+LoggingDecorator(decoratedHandler: HttpHandler)
+	+execute(request: Request): Response
+	+executeAsync(request: Request): CompletableFuture<Response>
+	-logRequest(request: Request): void
+	-logResponse(response: Response, duration: Duration): void
+	-logFailure(error: Throwable, duration: Duration): void
+}
+class HttpHandlerDecorator {
+}
+HttpHandlerDecorator <|-- LoggingDecorator
+class PipelineFactory [[java:structural.decorator.httpPipeline.Factory.PipelineFactory]] {
+	-PipelineFactory()
+	+{static} createPipeline(config: PipelineConfig): HttpHandler
+}
+interface BackoffStrategy [[java:structural.decorator.httpPipeline.Strategy.Retry.BackoffStrategy]] {
+	nextDelay(delay: int): Duration
+}
+class RetryPolicy [[java:structural.decorator.httpPipeline.Strategy.Retry.RetryPolicy]] {
+	-maxRetries: int
+	+RetryPolicy(maxRetries: int, backoffStrategy: BackoffStrategy)
+	+{static} fixedDelay(maxRetries: int, delay: Duration): RetryPolicy
+	+{static} exponentialBackoff(maxRetries: int, initialDelay: Duration, multiplier: double, maxDelay: Duration): RetryPolicy
+	+getMaxRetries(): int
+}
+class BackoffStrategy {
+}
+RetryPolicy --> "1" BackoffStrategy : backoffStrategy
+class BackoffStrategy {
+}
+RetryPolicy --> "1" BackoffStrategy : getBackoffStrategy()
+abstract class HttpHandlerDecorator [[java:structural.decorator.httpPipeline.HttpHandler.HttpHandlerDecorator]] {
+	#HttpHandlerDecorator(decoratedHandler: HttpHandler)
+	+execute(request: Request): Response
+	+executeAsync(request: Request): CompletableFuture<Response>
+}
+class HttpHandler {
+}
+HttpHandlerDecorator --> "1" HttpHandler : decoratedHandler
+interface HttpHandler {
+}
+HttpHandler <|.. HttpHandlerDecorator
+class AuthenticationDecorator [[java:structural.decorator.httpPipeline.Decorators.AuthenticationDecorator]] {
+	+AuthenticationDecorator(decoratedHandler: HttpHandler, strategy: AuthenticationStrategy)
+	-withAuth(request: Request): Request
+	+execute(request: Request): Response
+	+executeAsync(request: Request): CompletableFuture<Response>
+}
+class AuthenticationStrategy {
+}
+AuthenticationDecorator --> "1" AuthenticationStrategy : strategy
+class HttpHandlerDecorator {
+}
+HttpHandlerDecorator <|-- AuthenticationDecorator
+class RetryDecorator [[java:structural.decorator.httpPipeline.Decorators.RetryDecorator]] {
+	+RetryDecorator(decoratedHandler: HttpHandler, retryPolicy: RetryPolicy)
+	+execute(request: Request): Response
+	+executeAsync(request: Request): CompletableFuture<Response>
+	-executeWithRetry(request: Request, attempt: int): Response
+	-executeAsyncWithRetry(request: Request, attempt: int): CompletableFuture<Response>
+	-sleep(duration: Duration): void
+	-sleepAsync(duration: Duration): CompletableFuture<Void>
+}
+class RetryPolicy {
+}
+RetryDecorator --> "1" RetryPolicy : retryPolicy
+class HttpHandlerDecorator {
+}
+HttpHandlerDecorator <|-- RetryDecorator
+@enduml
