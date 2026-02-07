@@ -65,9 +65,9 @@ Custom requests can be created dynamically by wrapping an `JavaHttpHandler` with
 ---
 
 ## UML of Relevant Interactions
-[HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/Resources/HttpPipeline.png)
+![HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/Resources/HttpPipeline.png)
 
 ## How To Run
 1. Clone the repository
 2. Compile the project
-3. Run httpPipelineClient/Main.java
+3. Run `httpPipelineClient/Main.java`
