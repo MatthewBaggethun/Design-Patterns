@@ -23,19 +23,15 @@ import structural.decorator.httpPipeline.Strategy.Retry.FixedDelayStrategy;
  */
 public final class PipelineConfig {
 
-	// Logging
 	private final boolean enableLogging;
 
-	// Retry
 	private final boolean enableRetry;
 	private final int retryAttempts;
 	private final BackoffStrategy backoffStrategy;
 
-	// Timeout
 	private final boolean enableTimeout;
 	private final Duration timeout;
 
-	// Authentication
 	private final Optional<AuthenticationStrategy> authStrategy;
 
 	/**
@@ -50,19 +46,15 @@ public final class PipelineConfig {
 	 *                authentication strategies.
 	 */
 	private PipelineConfig(Builder builder) {
-		// Logging
 		this.enableLogging = builder.enableLogging;
 
-		// Retry
 		this.enableRetry = builder.enableRetry;
 		this.retryAttempts = builder.retryAttempts;
 		this.backoffStrategy = builder.backoffStrategy;
 
-		// Timeout
 		this.enableTimeout = builder.enableTimeout;
 		this.timeout = builder.timeout;
 
-		// Authentication
 		this.authStrategy = builder.authStrategy;
 	}
 
@@ -102,26 +94,23 @@ public final class PipelineConfig {
 	 * provides methods for each configuration option, allowing for a clear and
 	 * concise way to create a PipelineConfig instance with the desired settings.
 	 * Once all the desired options are set, the build() method can be called to
-	 * create an immutable PipelineConfig instance that can be used to configure an
-	 * HTTP pipeline.
+	 * create an immutable PipelineConfig instance that can be used in
+	 * PipelineFactory to create an HTTP pipeline with the specified behaviors.
 	 * 
 	 * @see PipelineConfig
+	 * @see PipelineFactory
 	 */
 	public static class Builder {
 
-		// Logging
 		private boolean enableLogging = false;
 
-		// Retry
 		private boolean enableRetry = false;
 		private int retryAttempts = 3;
 		private BackoffStrategy backoffStrategy = new FixedDelayStrategy(Duration.ofSeconds(1));
 
-		// Timeout
 		private boolean enableTimeout = false;
 		private Duration timeout = Duration.ofSeconds(5);
 
-		// Authentication
 		private Optional<AuthenticationStrategy> authStrategy = Optional.empty();
 
 		/**

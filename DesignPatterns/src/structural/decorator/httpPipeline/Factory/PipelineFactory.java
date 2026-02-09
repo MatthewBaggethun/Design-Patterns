@@ -70,7 +70,7 @@ public final class PipelineFactory {
 			handler = new LoggingDecorator(handler);
 		}
 
-		// Apply AuthenticationDecorator last to ensure it wraps the entire pipeline.
+		// AuthenticationDecorator applied last to ensure it wraps all components.
 		if (config.getAuthStrategy().isPresent()) {
 			AuthenticationStrategy strategy = config.getAuthStrategy().get();
 			handler = new AuthenticationDecorator(handler, strategy);

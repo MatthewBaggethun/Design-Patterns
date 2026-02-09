@@ -36,5 +36,9 @@ public abstract class HttpHandlerDecorator implements HttpHandler {
 	public CompletableFuture<Response> executeAsync(Request request) {
 		return decoratedHandler.executeAsync(request);
 	}
+	
+	public HttpHandler getDecoratedHandler() {
+		return decoratedHandler;
+	}
 
 }
