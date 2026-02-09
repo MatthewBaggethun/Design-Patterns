@@ -46,12 +46,12 @@ public class RetryDecorator extends HttpHandlerDecorator {
 
 	@Override
 	public Response execute(Request request) {
-		return executeWithRetry(request, 0);
+		return executeWithRetry(request, 1);
 	}
 
 	@Override
 	public CompletableFuture<Response> executeAsync(Request request) {
-		return executeAsyncWithRetry(request, 0);
+		return executeAsyncWithRetry(request, 1);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class RetryDecorator extends HttpHandlerDecorator {
 	 * until the maximum number of retries is reached or the request succeeds.
 	 *
 	 * @param request The HTTP request to be executed. Must not be null.
-	 * @param attempt The current attempt number, starting from 0. Used internally
+	 * @param attempt The current attempt number, starting from 1. Used internally
 	 *                to track the number of retries.
 	 * @return The HTTP response if the request succeeds within the allowed number
 	 *         of retries.
@@ -73,12 +73,12 @@ public class RetryDecorator extends HttpHandlerDecorator {
 		try {
 			return super.execute(request);
 		} catch (RuntimeException e) {
-			if (attempt < retryPolicy.getMaxRetries() && request.getHttpMethod().isIdempotent()) {
-				sleep(retryPolicy.getBackoffStrategy().nextDelay(attempt));
-				return executeWithRetry(request, attempt + 1);
-			} else {
+			if (attempt >= retryPolicy.getMaxRetries() || !request.getHttpMethod().isIdempotent()) {
 				throw e;
 			}
+
+			sleep(retryPolicy.getBackoffStrategy().nextDelay(attempt));
+			return executeWithRetry(request, attempt + 1);
 		}
 	}
 
@@ -90,29 +90,22 @@ public class RetryDecorator extends HttpHandlerDecorator {
 	 * the request succeeds.
 	 *
 	 * @param request The HTTP request to be executed. Must not be null.
-	 * @param attempt The current attempt number, starting from 0. Used internally
+	 * @param attempt The current attempt number, starting from 1. Used internally
 	 *                to track the number of retries.
 	 * @return A CompletableFuture that completes with the HTTP response if the
 	 *         request succeeds within the allowed number of retries, or completes
 	 *         exceptionally if the request fails and the retry conditions are not
 	 *         met (e.g., non-idempotent method or max retries exceeded).
 	 */
+	@SuppressWarnings("unused")
 	private CompletableFuture<Response> executeAsyncWithRetry(Request request, int attempt) {
-		return super.executeAsync(request).handle((response, error) -> {
-			if (error == null || attempt >= retryPolicy.getMaxRetries() || !request.getHttpMethod().isIdempotent()) {
-				if (error != null)
-					throw new RuntimeException(error);
-				return response;
-			} else {
-				return null;
+		return super.executeAsync(request).exceptionallyCompose(error -> {
+			if (attempt >= retryPolicy.getMaxRetries() || !request.getHttpMethod().isIdempotent()) {
+				return CompletableFuture.failedFuture(error);
 			}
-		}).thenCompose(response -> {
-			if (response != null) {
-				return CompletableFuture.completedFuture(response);
-			} else {
-				return sleepAsync(retryPolicy.getBackoffStrategy().nextDelay(attempt))
-						.thenCompose(v -> executeAsyncWithRetry(request, attempt + 1));
-			}
+
+			return sleepAsync(retryPolicy.getBackoffStrategy().nextDelay(attempt))
+					.thenCompose(v -> executeAsyncWithRetry(request, attempt + 1));
 		});
 	}
 

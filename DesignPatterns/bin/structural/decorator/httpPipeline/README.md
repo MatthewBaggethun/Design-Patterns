@@ -67,6 +67,10 @@ Custom requests can be created dynamically by wrapping an `JavaHttpHandler` with
 ## UML of Relevant Interactions
 ![HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/Resources/HttpPipeline.png)
 
+## Testing Overview
+
+Focus has been placed on testing the behavior of wrapped objects, and their sync/async functionalities. 
+
 ## How To Run
 1. Clone the repository
 2. Compile the project
