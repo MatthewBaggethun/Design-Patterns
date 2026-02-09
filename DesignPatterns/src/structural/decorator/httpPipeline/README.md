@@ -71,7 +71,7 @@ Assuming the client utilizes the builder/factory implementation provided, the fl
 
 ## Core Class Diagram
 The interactions between the `HttpHandler` and `Decorators` packages are core to the project.
-![HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/Resources/HttpPipeline.png)
+![HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/Resources/HttpPipelineCoreClass.png)
 
 
 ## How To Run
