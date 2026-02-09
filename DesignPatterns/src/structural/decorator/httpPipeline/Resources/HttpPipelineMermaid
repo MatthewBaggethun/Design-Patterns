@@ -1,0 +1,65 @@
+flowchart LR
+
+    Client[Client Code]
+
+    subgraph Pipeline
+        Factory[PipelineFactory]
+        Config[PipelineConfig]
+    end
+
+    subgraph HttpHandler
+        JavaHandler[JavaHttpHandler]
+    end
+
+    subgraph Decorators
+        AuthDec[AuthenticationDecorator]
+        LogDec[LoggingDecorator]
+        RetryDec[RetryDecorator]
+        TimeoutDec[TimeoutDecorator]
+    end
+
+    subgraph Strategies
+        subgraph AuthStrategies
+            Bearer[BearerTokenStrategy]
+            ApiKey[ApiKeyStrategy]
+            Password[PasswordStrategy]
+        end
+
+        subgraph RetryStrategies
+            Fixed[FixedDelayStrategy]
+            Expo[ExponentialBackoffStrategy]
+        end
+    end
+
+    subgraph Retry
+        Policy[RetryPolicy]
+    end
+
+    subgraph Model
+        Request
+        Response
+        Headers
+        HttpMethod
+    end
+
+    %% Client entry
+    Client --> Factory
+    Client --> Config
+
+    %% Factory
+    Config --> Factory
+    Factory --> HttpHandler
+    Config --> HttpHandler
+
+    %% Decorators
+    HttpHandler --> RetryDec
+    HttpHandler --> LogDec
+    HttpHandler --> AuthDec
+    HttpHandler --> TimeoutDec
+
+    %% Strategies
+    RetryDec --> Retry
+    Retry --> RetryStrategies
+    AuthDec --> AuthStrategies
+
+    Decorators --> Request

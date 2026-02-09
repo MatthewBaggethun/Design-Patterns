@@ -38,7 +38,7 @@ This project demonstrates how design patterns can be utilized to create a system
 
 Generating a request with the builder and factory will result in the following order of concerns:
 
-Request --(contains)--> AuthenticationDecorator -> LoggingDecorator -> RetryDecorator -> TimeoutDecorator -> JavaHttpHandler --(obtains)--> Response
+![PipelineSequence](/DesignPatterns/src/structural/decorator/httpPipeline/Resources/HttpPipelineSequence.png)
 
 Generating custom requests with an altered order of concerns is also possible, but not supported by the builder and factory implementation. This can be done by wrapping a `JavaHttpHandler` in any order. Note that the order of concerns does matter in the request pipeline. For example: if logging is placed outside of a retry decorator it cannot be aware of the repeated requests.
 
@@ -48,7 +48,7 @@ If a custom implementation will be performed repeatedly, then a new builder and 
 
 ---
 
-## Project Architectural Overview
+## Project Architecture
 
 The `Model` package contains classes responsible for representing requests and responses. Every request and response contains headers and optionally a body; the request type also defines idempotency. These features are all accounted for in the `Response`, `Request`, `Headers` and `HttpMethod` classes respectively.
 
@@ -56,22 +56,26 @@ The core abstraction `JavaHttpHandler` utilizes `Java.Net` to transform requests
 
 Request concerns are implemented via decorators around `JavaHttpHandler`, which are found in the `Decorators` package. Each decorator holds a reference to an `HttpHandler`. This allows the context class to be wrapped an infinite number of times. The order of wrapping will affect the order in which concerns are executed. The outermost wrapper will act as the entry and exit for the pipeline.
 
-Concerns such as authentication and connectivity can be implemented in many ways. The `Strategy` package contains sub packages for such concerns. Strategies can be swapped dynamically to alter performance. The `Auth` sub package contains authentication strategy implementations, and the `Retry` sub package contains connectivity strategy implementations.
+Concerns such as authentication and connectivity can be implemented in many ways. The `Strategy` package contains sub packages for such concerns. Strategies can be swapped dynamically to alter performance (but not after instantiation). The `Auth` sub package contains authentication strategy implementations, and the `Retry` sub package contains connectivity strategy implementations.
 
 Executing a request is done by configuring the builder in `PipelineConfig`. The config is passed to `PipelineFactory`, which ensures the order of concerns is respected.
 
 Custom requests can be created dynamically by wrapping an `JavaHttpHandler` with decorators. There are no restrictions to custom implementations, but order will affect the process pipeline.
 
+The `Test` package contains tests for decorators and for the factory/builder implementation. The `LoggingDecorator` does not have tests. In a real world implementation, logging would be handled via a logger object and not a decorator. `PipelineFactoryTest` acts both as an integration test for the system and unit test for the implementation.
+
+Assuming the client utilizes the builder/factory implementation provided, the flow of operations will look like:
+![HttpPipelinePackage](/DesignPatterns/src/structural/decorator/httpPipeline/Resources/HttpPipelinePackage.png)
+
 ---
 
-## UML of Relevant Interactions
+## Core Class Diagram
+The interactions between the `HttpHandler` and `Decorators` packages are core to the project.
 ![HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/Resources/HttpPipeline.png)
 
-## Testing Overview
-
-Focus has been placed on testing the behavior of wrapped objects, and their sync/async functionalities. 
 
 ## How To Run
-1. Clone the repository
-2. Compile the project
-3. Run `httpPipelineClient/Main.java`
+1. Clone the repository.
+2. Compile the project.
+3. Run `httpPipelineClient/Main.java`.
+4. Optionally define your own `PipelineConfig` to test different interactions.
