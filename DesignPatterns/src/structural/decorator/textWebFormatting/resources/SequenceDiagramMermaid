@@ -1,0 +1,14 @@
+sequenceDiagram
+
+participant D as Decorator1
+participant D2 as Decorator2
+participant DN as DecoratorN
+participant PT as PlainText
+
+D ->> D2: format
+D2 ->> DN: format
+DN ->> PT: format
+
+PT ->> DN: PlainText wrapped with DecoratorN
+DN ->> D2: DecoratorN wrapped with Decorator2
+D2 ->> D: Decorator2 wrapped with Decorator1

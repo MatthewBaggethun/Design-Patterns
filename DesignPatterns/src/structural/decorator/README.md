@@ -19,4 +19,5 @@ There are pros and cons to consider when implementing Decorator. Since each wrap
 ## Overview & Navigation
 All sub-packages of this directory contain projects utilizing the Decorator Pattern.
 - [HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/README.md)
+- [TextWebFormatting](/DesignPatterns/src/structural/decorator/textWebFormatting/README.md)
 - [CoffeeShop](/DesignPatterns/src/structural/decorator/coffeeShop/README.md)

@@ -14,6 +14,7 @@ Instead of hard-coding many Duck classes, it is instead possible to encapsulate 
 ## Overview & Navigation
 These projects utilize Strategy Pattern in combination with other patterns:
 - [HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/README.md)
+- [TextWebFormatting](/DesignPatterns/src/structural/decorator/textWebFormatting/README.md)
 
 All sub-packages of this directory contain projects utilizing only Strategy Pattern. These projects are extremely simplistic.
 - [AIMovement](/DesignPatterns/src/behavioral/strategy/AIMovement/README.md)

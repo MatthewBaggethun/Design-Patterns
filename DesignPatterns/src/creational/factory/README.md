@@ -7,6 +7,7 @@ Placeholder
 These projects utilize Factory Pattern in combination with other patterns:
 - [HttpPipeline](/DesignPatterns/src/structural/decorator/httpPipeline/README.md)
 - [CoffeeShop](/DesignPatterns/src/structural/decorator/coffeeShop/README.md)
+- [TextWebFormatting](/DesignPatterns/src/structural/decorator/textWebFormatting/README.md)
 
 All sub-packages of this directory contain projects utilizing the Factory Pattern.
 

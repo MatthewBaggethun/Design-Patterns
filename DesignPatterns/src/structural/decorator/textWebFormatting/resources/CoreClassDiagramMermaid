@@ -1,0 +1,71 @@
+---
+title: Core Functionality
+---
+
+classDiagram
+
+    class InputToFormat{
+        << Interface >>
+        format(sb: StringBuilder, fs: FormattingStrategy)
+    }
+    
+    class AbstractFormatter{
+        << Abstract Class >>
+        InputToFormat
+        AbstractFormatter(InputToFormat)
+    }
+
+    class FormattingStrategy{
+        << Interface >>
+        applyBold(txt: StringBuilder) StringBuilder 
+        applyItalic(txt: StringBuilder) StringBuilder 
+        applyStrikethrough(txt: StringBuilder) StringBuilder 
+        applyInlineCode(txt: StringBuilder) StringBuilder 
+        applyLink(txt: StringBuilder, url: StringBuilder) StringBuilder 
+    }
+
+    class HtmlStrategy{
+        applyH1(txt: StringBuilder) StringBuilder 
+        applyParagraph(txt: StringBuilder) StringBuilder 
+    }
+
+    class MarkdownStrategy{
+        applyHighlight(txt: StringBuilder) StringBuilder
+        applyImage(txt: StringBuilder, imgLocation: StringBuilder) StringBuilder
+    }
+
+    class Decorator{
+
+    }
+
+    class PlainText{
+        PlainText(txt: StringBuilder)
+    }
+
+%%Relationships Below
+InputToFormat <|-- AbstractFormatter:  implements 
+AbstractFormatter o-- InputToFormat: contains
+AbstractFormatter ..> FormattingStrategy: utilizes
+FormattingStrategy <|-- HtmlStrategy:  implements
+FormattingStrategy <|-- MarkdownStrategy:  implements
+AbstractFormatter <|-- Decorator: extends
+AbstractFormatter <|-- PlainText: extends
+Decorator ..> InputToFormat: utilizes
+Decorator ..> FormattingStrategy: utilizes
+
+%%Namespace Declaration
+namespace FormatStrategy {
+    class FormattingStrategy
+    class HtmlStrategy
+    class MarkdownStrategy
+}
+
+namespace CoreAbstraction{
+    class InputToFormat
+    class AbstractFormatter
+    class PlainText
+}
+
+namespace GenericDecoratorImpl{
+    class Decorator
+}
