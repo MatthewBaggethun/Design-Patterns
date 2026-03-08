@@ -14,6 +14,7 @@ These projects utilize Factory Pattern in combination with other patterns:
 - [TextWebFormatting](/DesignPatterns/src/structural/decorator/textWebFormatting/README.md)
 
 All sub-packages of this directory contain projects utilizing the Factory Pattern.
+- [LoanApproval](/DesignPatterns/src/creational/factory/loanApprovalFactory/README.md)
 
 
 
