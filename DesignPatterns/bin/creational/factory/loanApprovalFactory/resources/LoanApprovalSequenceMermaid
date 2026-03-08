@@ -1,0 +1,45 @@
+sequenceDiagram
+
+%% Participants
+participant Client
+participant ConcreteBank
+participant HomeLoan
+participant CarLoan
+participant EducationLoan
+
+%% Client operations start for HomeLoan
+Client ->>+ ConcreteBank: new Bank
+activate Client
+
+%% HomeLoan creation process
+ConcreteBank ->>+ HomeLoan: createLoan()
+HomeLoan ->>- ConcreteBank: new HomeLoan
+
+%% Client operations end for HomeLoan
+ConcreteBank ->> Client: new HomeLoan
+deactivate ConcreteBank
+deactivate Client
+
+%% Client operations start for CarLoan
+Client ->>+ ConcreteBank: new Bank
+activate Client
+
+%% CarLoan creation process
+ConcreteBank ->>+ CarLoan: createLoan()
+CarLoan ->>- ConcreteBank: new CarLoan
+
+%% Client operations end for CarLoan
+ConcreteBank ->>- Client: new CarLoan
+deactivate Client
+
+%% Client operations start for EducationLoan
+Client ->>+ ConcreteBank: new Bank
+activate Client
+
+%% EducationLoan creation process
+ConcreteBank ->>+ EducationLoan: createLoan()
+EducationLoan ->>- ConcreteBank: new EducationLoan 
+
+%% Client operations end for EducationLoan
+ConcreteBank ->>- Client: new EducationLoan
+deactivate Client

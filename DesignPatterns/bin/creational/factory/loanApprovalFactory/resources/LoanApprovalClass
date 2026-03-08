@@ -1,0 +1,42 @@
+---
+Title: Loan Approval System
+---
+
+classDiagram
+
+    %% Class definitions
+    class Bank
+    <<abstract>> Bank
+    Bank: +createLoan() Loan 
+
+    class Loan
+    <<abstract>> Loan
+    Loan: -Account account
+    Loan: -double loanAmount
+    Loan: -double interestRate
+    Loan: -int loanTerm
+    Loan: -double downPayment
+    Loan: -bool prePayAccountBalance
+
+    Loan: +applyForLoan() boolean
+    Loan: +approveLoan() void
+    Loan: +disburseLoan() void
+    Loan: +calculateInterest() double
+
+    class Account
+    <<abstract>> Account
+    Account: -double balance
+    Account: -double interestRate
+    Account: +getBalance() double
+    Account: +setBalance() double
+    Account: +balanceAfterInterest() double
+
+    %% Relationships
+    Bank <|-- NationalBank: extends
+    Loan <|-- HomeLoan: extends
+    Loan <|-- CarLoan: extends
+    Loan <|-- EducationLoan: extends
+    Account <|-- SavingsAccount: extends
+
+    NationalBank *-- Loan: utilizes
+    NationalBank *-- Account: utilizes
