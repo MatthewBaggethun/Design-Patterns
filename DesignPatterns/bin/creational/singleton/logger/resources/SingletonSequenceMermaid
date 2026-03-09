@@ -1,0 +1,31 @@
+sequenceDiagram
+
+%% Participants
+participant Client
+participant proxyGetInstanceMethod
+participant LoggerClassic
+participant LoggerModern
+
+%% Client operations start for LoggerClassic
+Client ->>+ proxyGetInstanceMethod: getInstance()
+activate Client
+
+%% Proxy to LoggerClassic
+proxyGetInstanceMethod ->>+ LoggerClassic: null check true
+LoggerClassic ->>- proxyGetInstanceMethod: instance 
+
+%% Proxy back to Client
+proxyGetInstanceMethod ->>- Client: instance
+deactivate Client
+
+%% Client operations start for LoggerModern
+Client ->>+ proxyGetInstanceMethod: .INSTANCE 
+activate Client
+
+%% Proxy to LoggerModern
+proxyGetInstanceMethod ->>+ LoggerModern: enum type check
+LoggerModern ->>- proxyGetInstanceMethod: enum type instance
+
+%% LoggerModern back to Client
+proxyGetInstanceMethod ->>- Client: enum instance
+deactivate Client
