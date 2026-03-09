@@ -8,3 +8,4 @@ Testing has been intentionally avoided due to real life time constrains. The foc
 
 ## Design Pattern Overview & Navigation
 - [Factory](factory/README.md)
+- [Singleton](/DesignPatterns/src/creational/singleton/README.md)
