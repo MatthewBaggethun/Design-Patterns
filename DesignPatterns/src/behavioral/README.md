@@ -9,3 +9,4 @@ Testing has been intentionally avoided due to real life time constrains. The foc
 ## Design Pattern Overview & Navigation
 - [Strategy Pattern](/DesignPatterns/src/behavioral/strategy/README.md)
 - [Observer Pattern](/DesignPatterns/src/behavioral/observer/README.md)
+- [Command Pattern](/DesignPatterns/src/behavioral/command/README.md)
