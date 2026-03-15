@@ -1,0 +1,26 @@
+sequenceDiagram
+    
+    %% Participants
+    participant Client
+    participant Receiver
+    participant Command
+    participant Invoker
+
+    %% Client to  Receiver
+    Client ->>+ Receiver: new Receiver
+    activate Client
+
+    %% Client to Command
+    Client ->>+ Command: new Command
+
+    %% Client to Invoker
+    Client ->>+ Invoker: new Invoker
+    activate Invoker
+
+    %% Invoker to Command
+    Invoker ->>+ Command: execute()
+
+    %% Command to Receiver
+    Command ->>+ Receiver: action()
+    deactivate Invoker
+    deactivate Client

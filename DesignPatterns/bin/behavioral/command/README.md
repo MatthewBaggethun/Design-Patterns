@@ -25,3 +25,4 @@ I view the Command Pattern as an flexible alternative between the Strategy and D
 These projects utilize the Command Pattern in combination with other patterns:
 
 All sub-packages of this directory contain projects utilizing the Command Pattern:
+- [Remote Control](/DesignPatterns/src/behavioral/command/remoteControl/README.md)

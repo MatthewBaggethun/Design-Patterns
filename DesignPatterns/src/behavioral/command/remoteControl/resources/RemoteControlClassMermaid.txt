@@ -1,0 +1,26 @@
+classDiagram
+
+    %% Class Definitions
+    class Command
+    <<interface>> Command
+    Command: +execute() void
+    Command: +undo() void
+
+    class ConcreteCommand
+    ConcreteCommand: -Receiver Receiver
+
+    class RemoteControl
+    RemoteControl: -onCommands Command
+    RemoteControl: -offCommands Command
+    RemoteControl: +setCommand() void
+    RemoteControl: +onButtonWasPushed() void
+    RemoteControl: +offButtonWasPushed() void
+
+    class Receiver
+    Receiver: -fields anything
+    Receiver: +methods() anything
+
+    %% Relationships
+    Command <|-- ConcreteCommand: implements
+    ConcreteCommand *-- Receiver: contains
+    RemoteControl o-- Command: contains many
