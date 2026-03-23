@@ -1,0 +1,57 @@
+classDiagram
+
+    %% Class Definitions
+
+    class Command
+    <<Interface>> Command
+    Command: +execute() void
+    Command: +undo() void
+
+    class ConcreteCommand
+    ConcreteCommand: - Editor.INSTANCE
+
+    class CommandManager
+    CommandManager: - nodes Map
+    CommandManager: - root CommandNode
+    CommandManager: - current CommandNode
+    CommandManager: execute()
+    CommandManager: undo()
+    CommandManager: redo()
+
+    class CommandNode
+    CommandNode: - command Command
+    CommandNode: - id int
+    CommandNode: - parent CommandNode
+    CommandNode: - children List<CommandNode>
+    CommandNode: addChild()
+    CommandNode: getters()
+
+    class Editor
+    <<Enumeration>> Editor
+    Editor: - pages Map
+    Editor: - current Page
+    Editor: insertText()
+    Editor: deleteText()
+    Editor: replaceText()
+    Editor: moveCursor()
+    Editor: addPage()
+    Editor: removePage()
+    Editor: getPage()
+    Editor: getPages()
+    Editor: setPage()
+    Editor: setPages()
+
+    class Page
+    Page: - Editor.INSTANCE
+    Page: - name String
+    Page: - contents StringBuilder
+    Page: - cursorPosition int
+    Page: getters()
+    Page: setPageName()
+    Page: setCursorPosition()
+
+    %% Relations
+    Command <|-- ConcreteCommand: implements
+    CommandManager o-- CommandNode: contains many
+    CommandNode *-- Command : contains
+    Editor o-- Page: contains many

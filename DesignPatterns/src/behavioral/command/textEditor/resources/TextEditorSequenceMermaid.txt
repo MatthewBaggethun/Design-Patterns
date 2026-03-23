@@ -1,0 +1,33 @@
+sequenceDiagram
+    
+    %% Participants
+    Participant Client
+    Participant Editor
+    Participant Page
+    Participant ConcreteCommand
+    Participant CommandManager
+
+    %% Initialization
+
+    %% Client to Reciever
+    activate Client
+    Client ->>+ Editor: Editor.INSTANCE
+    Client ->>+ Page: new Page
+
+    %% Client to ConcreteCommand
+    Client ->>+ ConcreteCommand: new Command
+    activate ConcreteCommand
+
+    %% Client to ConcreteManager
+    Client ->>+ CommandManager: new CommandManager
+    deactivate Client
+
+    %% Usage
+
+    %% Client sends command
+    Client ->>+ CommandManager: execute() / undo() / redo()
+    activate CommandManager
+
+    %% CommandManager handles client request
+    CommandManager ->>+ Client: executed / undone / redone with tree
+    deactivate CommandManager

@@ -23,6 +23,7 @@ I view the Command Pattern as an flexible alternative between the Strategy and D
 
 ## Overview & Navigation
 These projects utilize the Command Pattern in combination with other patterns:
+- [Text Editor](/DesignPatterns/src/behavioral/command/textEditor/README.md)
 
 All sub-packages of this directory contain projects utilizing the Command Pattern:
 - [Remote Control](/DesignPatterns/src/behavioral/command/remoteControl/README.md)

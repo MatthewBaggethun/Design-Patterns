@@ -13,6 +13,7 @@ After the release of javaSE 5 came enumerations which provided a natural solutio
 
 ## Overview & Navigation
 These projects utilize Singleton Pattern in combination with other patterns:
+- [Text Editor](/DesignPatterns/src/behavioral/command/textEditor/README.md)
 
 All sub-packages of this directory contain projects utilizing the Singleton Pattern:
 - [Logger](/DesignPatterns/src/creational/singleton/logger/README.md)
